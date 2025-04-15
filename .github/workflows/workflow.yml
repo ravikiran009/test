@@ -20,6 +20,6 @@ jobs:
           CHANGED_FILES=$(git diff ${{github.event.before}} ${{github.sha}})
           echo "$CHANGED_FILES" |
           while read file; do
-            echo "Uploading $file"
+            echo "Uploading $file to bucket"
           done
 
