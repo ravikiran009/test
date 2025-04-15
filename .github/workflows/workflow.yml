@@ -23,8 +23,7 @@ jobs:
       - name: Changed Files To be Uploaded
         run: |
           CHANGED_FILES=$(git diff --name-only ${{github.event.before}} ${{github.sha}})
-          echo "$CHANGED_FILES" |
-          while read file; do
+          for file in $CHANGED_FILES; do
             echo "Uploading $file to bucket"
           done
 
