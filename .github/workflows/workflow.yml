@@ -24,7 +24,7 @@ jobs:
         run: |
           CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
           for file in $CHANGED_FILES; do
-            if [ -f "$file" ]; then
+            if [ -f "$file" ] && ! git check-ignore -q "$file"; then
               echo "Uploading $file to bucket"
             fi
           done
