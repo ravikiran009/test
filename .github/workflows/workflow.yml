@@ -1,0 +1,26 @@
+name: Test Upload Files
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  test-upload-files:
+    name: Setup, Push
+    runs-on: ubuntu-latest
+    environment: test
+
+    permissions:
+      content: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: Changed Files To be Uploaded
+        run: |
+          CHANGED_FILES=$(git diff ${{github.event.before}} ${{github.sha}})
+          echo "$CHANGED_FILES"
+
+          for file in ${{CHANGED_FILES}}; do
+            echo "Uploading $file"
+          done
+
